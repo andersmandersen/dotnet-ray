@@ -23,7 +23,51 @@ $ Install-Package Velcon.Ray
 Send message to Ray client 
 ```c#
 
+using System;
+using Velcon.Ray;
 
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+			// Send charles         
+            new Ray().Charles();
+
+			// Send message
+            new Ray("Hallo world!");            
+        }        
+    }
+}
+```
+
+Send object to Ray client
+```c#
+
+using System;
+using Velcon.Ray;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+		public class Book
+        {
+            public string BookId { get; set; }
+            public string Title { get; set; }
+        }
+
+
+        static void Main(string[] args)
+        {   
+			var book = new Book { BookId = "123",  Title = "Pride and Prejudice" };
+
+			// Send message
+            new Ray(book);            
+        }        
+    }
+}
 ```
 
 ## Contribute
