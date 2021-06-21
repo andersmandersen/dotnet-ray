@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Velcon.Ray;
 
 namespace ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
-        {            
-            new Ray().Charles();
+        static async Task Main(string[] args)
+        {
 
-            new Ray("Hallo world!");            
+            new Ray().ClearScreen();
+            await new Ray().PauseAsync();
+            new Ray().Charles();
+            new Ray("Hallo world!").Green();            
         }        
     }
 }
