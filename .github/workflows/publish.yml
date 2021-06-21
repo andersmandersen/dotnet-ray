@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release --no-restore      
+        run: dotnet build src/Ray/Ray.csproj --configuration Release --no-restore   
       - name: Publish on version change
         id: publish_nuget
         uses: rohith/publish-nuget@v2
