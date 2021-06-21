@@ -21,7 +21,7 @@ jobs:
         id: publish_nuget
         uses: rohith/publish-nuget@v2
         with:          
-          PROJECT_FILE_PATH: Ray.csproj
+          PROJECT_FILE_PATH: src/Ray/Ray.csproj
           VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
           TAG_FORMAT: '*'
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}       
