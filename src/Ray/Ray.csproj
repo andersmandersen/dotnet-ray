@@ -5,8 +5,9 @@
     <RootNamespace>Velcon.Ray</RootNamespace>
     <AssemblyName>Velcon.Ray</AssemblyName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>0.1.1</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Debugging .Net with Ray to fix problems faster</Description>
   </PropertyGroup>
 
   <ItemGroup>
