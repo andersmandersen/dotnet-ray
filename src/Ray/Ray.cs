@@ -1,8 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using DotNet.WebUtils;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Velcon.Ray.Payloads;
 
 namespace Velcon.Ray
@@ -43,7 +49,9 @@ namespace Velcon.Ray
             }
 
             var payload = PayloadFactory.GetPayload(arg);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+
+            return this;
         }
         
         public Ray Color(string color)
@@ -51,7 +59,8 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = ColorPayload.Create(color);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            return this;
         }
 
         public Ray ClearScreen()
@@ -59,7 +68,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = ClearScreenPayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+
+            return this;
         }
 
         public Ray NewScreen(string name = "")
@@ -67,7 +78,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = NewScreenPayload.Create(name);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray ClearAll()
@@ -75,7 +88,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = ClearAllPayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Bool(Boolean value)
@@ -83,7 +98,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = BoolPayload.Create(value);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray ShowApp()
@@ -91,7 +108,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = ShowAppPayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray HideApp()
@@ -99,7 +118,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = HideAppPayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray String(string value)
@@ -107,7 +128,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = StringPayload.Create(value);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Null()
@@ -115,7 +138,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = NullPayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Hide()
@@ -123,7 +148,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = HidePayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Remove()
@@ -131,7 +158,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = RemovePayload.Create();
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Notify(string value)
@@ -139,7 +168,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = NotifyPayload.Create(value);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Html(string value)
@@ -147,7 +178,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = HtmlPayload.Create(value);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Json<T>(T arg)
@@ -155,7 +188,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = JsonStringPayload.Create(arg);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Time(DateTime time, string format)
@@ -163,7 +198,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = TimePayload.Create(time, format);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Custom<T>(T arg, string label)
@@ -171,7 +208,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = CustomPayload.Create(arg, label);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Image(string location)
@@ -179,7 +218,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = ImagePayload.Create(location);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Size(string size)
@@ -187,7 +228,9 @@ namespace Velcon.Ray
             this._stackFrame = new StackFrame(1, true);
 
             var payload = SizePayload.Create(size);
-            return this.SendRequest(payload);
+            this.SendRequest(payload);
+            
+            return this;
         }
 
         public Ray Green()
@@ -225,21 +268,21 @@ namespace Velcon.Ray
             return this.Send("🎶 🎹 🎷 🕺");
         }
 
-        public Ray Pause()
+        public async Task<Ray> PauseAsync()
         {
             this._stackFrame = new StackFrame(1, true);
 
             string lockName = Guid.NewGuid().ToString();
 
             var payload = CreateLockPayload.Create(lockName);
-            this.SendRequest(payload);
+            await this.SendRequest(payload);
 
             int i = 0;
             while (i < 10)
             {
                 Thread.Sleep(1000);
 
-                LockResponse res = this.LockExists(lockName);
+                LockResponse res = await this.LockExistsAsync(lockName);
                 if (!res.active)
                 {
                     break;
@@ -272,7 +315,7 @@ namespace Velcon.Ray
         /// </summary>
         /// <param name="payload"></param>
         /// <returns></returns>
-        public Ray SendRequest(Payload payload)
+        private async Task<Ray> SendRequest(Payload payload)
         {
             Request r = new Request(this.uuid, payload);
 
@@ -281,7 +324,7 @@ namespace Velcon.Ray
             {                
                 item.Origin = new
                 {
-                    file = this._stackFrame.GetFileName(),
+                    file = this._stackFrame.GetFileName() == null ? "Unkown file" : this._stackFrame.GetFileName(),
                     line_number = this._stackFrame.GetFileLineNumber().ToString()
                 };
             }
@@ -289,32 +332,31 @@ namespace Velcon.Ray
             // Inject Meta
             r.Meta = new
             {
-                ray_package_version = "0.1.0"
+                ray_package_version = "0.1.1"
             };
 
-            var client = new RestClient("http://" + _client.Host + ":" + _client.Port);            
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/json");
-            request.AddParameter("application/json", r.ToJson(), ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);            
-            
+
+
+            var client = new HttpClient();
+            await client.PostAsync("http://" + _client.Host + ":" + _client.Port, new StringContent(r.ToJson(), Encoding.UTF8, "application/json"));
+
             return this;
         }
 
-        private LockResponse LockExists(string lockName)
+        private async Task<LockResponse> LockExistsAsync(string lockName)
         {
-            var client = new RestClient("http://" + _client.Host + ":" + _client.Port + "/locks/" + lockName);
-            var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
-            Console.WriteLine(response);
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("http://" + _client.Host + ":" + _client.Port + "/locks/" + lockName);
 
-            LockResponse resObj = JsonConvert.DeserializeObject<LockResponse>(response.Content);
+            string body = await response.Content.ReadAsStringAsync();
+            LockResponse resObj = JsonConvert.DeserializeObject<LockResponse>(body);
             if (resObj.stop_execution)
             {
                 System.Environment.Exit(1);
             }
 
             return resObj;
+            
         }
     }
 }
